@@ -1,0 +1,136 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6 text-left' style='align-content: center; margin-top: 20px'>
+            Pretrazi: 
+            <input type='text' name='pretraga' [(ngModel)]='pretraga'>
+            <button (click)='pretrazi()'>Pretraga</button>
+            <br/>
+            Sortiraj po: 
+            <select name='order' [(ngModel)]='order' (change)='orderThem()'>
+                <option value='+'>Rastuce</option>
+                <option value='-'>Opadajuce</option>
+            </select>
+            <select name='criteria' [(ngModel)]='criteria' (change)='orderThem()'>
+                <option value='name'>Ime</option>
+                <option value='startDate'>Datum pocetka</option>
+                <option value='endDate'>Datum kraja</option>
+            </select>
+            <table>
+                <tr>
+                    <th>
+                        Ime
+                    </th>
+                    <th>
+                        Datum pocekta
+                    </th>
+                    <th>
+                        Datum kraja
+                    </th>
+                    <th>
+                        Vreme za izradu
+                    </th>
+                    <th>
+                        
+                    </th>
+                </tr>
+                <tr *ngFor='let t of testovi; trackBy: '>
+                    <td>
+                        <a (click)='desno(t)'>
+                            {{t.name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{t.startDate}}
+                    </td>
+                    <td>
+                        {{t.endDate}}
+                    </td>
+                    <td style='padding-left: 15px;'>
+                        <ng-container *ngIf="t.type=='test'">
+                            {{t.time}}
+                        </ng-container>
+                    </td>
+                    <td *ngIf="t.autor==korisnik.korime">
+                        <button title="Pregled" (click)='pregled(t)'>P</button>
+                    </td>
+                    <td *ngIf="t.autor==korisnik.korime">
+                        <button title="Obrisi" (click)='delete(t)' style='background-color: firebrick; color:floralwhite'>X</button>
+                    </td>
+                </tr>
+            </table>
+            <div>
+               <br/> <b>Unos novog testa/ankete:</b> <br/><br/>
+               Anketa ili test?: 
+               <select name='type' [(ngModel)]='type'>
+                   <option value='anketa' selected>Anketa</option>
+                   <option value='test'>Test</option>
+               </select> <br/>
+               Ime: <input type='text' name='name' [(ngModel)]='name' size="50"> <br/>
+               Datum pocetka: <input type='text' name='startDate' [(ngModel)]='startDate'> <br/>
+               Datum kraja: <input type='text' name='endDate' [(ngModel)]='endDate'> <br/>
+               Opis: <input type='text' name='opis' [(ngModel)]='opis' size="50"> <br/>
+               <ng-container *ngIf="type=='test'">
+                Vreme: <input type='text' name='time' [(ngModel)]='time'> <br/>
+                Poeni: <input type='text' name='points' [(ngModel)]='points'> <br/>
+               </ng-container>
+               <ng-container *ngIf="type=='anketa'">
+                Privatnost: <input type='text' name='privatnost' [(ngModel)]='privatnost'> <br/>
+                Broj stranica: <input type='text' name='page' [(ngModel)]='page'> <br/>
+               </ng-container>
+               <br/> Unesite jedno po jedno pitanje za ovaj test/anketu: <br/>
+               Tekst pitanja: <input type='text' name='question' [(ngModel)]='question' size="45"> <br/>
+               Tip (1,2,3,4,5): <input type='text' name='qtype' [(ngModel)]='qtype'> <br/>
+               <ng-container *ngIf="type=='anketa' && (qtype == '1' || qtype == '2')">
+                Broj trazenih odgovora: <input type='text' name='numberAnswers' [(ngModel)]='numberAnswers'> <br/>
+               </ng-container>
+               <ng-container *ngIf="type=='anketa'">
+                Obavezan odgovor (0-ne, 1-da): <input type='text' name='obavezan' [(ngModel)]='obavezan'> <br/>
+               </ng-container>
+               <ng-container *ngIf="qtype=='4' || qtype=='5'">
+                Ponudjeni odgovori (razdvojiti zarezom, bez razmaka): <input type='text' name='answers' [(ngModel)]='answers'> <br/>
+               </ng-container>
+               <ng-container *ngIf="type=='test'">
+                Tacni odgovori (ako ima vise, razdvojiti zarezom, bez razmaka): <input type='text' name='correct' [(ngModel)]='correct'> <br/>
+               </ng-container>   
+               <button (click)='addQ()'>Unesi pitanje</button> <br/><br/><br/>
+               <button (click)='addT()'>Unesi test/anketu</button><br/>
+               <div style='color:red'>
+                {{message3}}
+               </div>            
+            </div>
+        </div>
+        <div class='col-md-6' style='margin-top: 200px; padding-left: 50px'>
+            <div>
+                {{about}} <br/> <br/>
+                {{message2}} <br/>
+                <button (click)='pocni()' *ngIf='dozvoliRad'>Pocni</button>
+            </div>
+            <div style='margin-top: 205px'>
+                <b>Unos kroz JSON fajl:</b> <br/><br/>
+                <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                <button (click)="fileInput.click()">Select File</button>
+                <button (click)="upload()">Upload!</button><br/>
+                {{message4}}
+            </div>
+            <div style='margin-top: 40px'>
+                <b>Ubacite pitanje iz baze: </b>
+                <ng-container *ngIf="type=='test' && testPitanja != null">
+                    <select name='testPitanje' [(ngModel)]='testPitanje'>
+                        <option *ngFor="let p of testPitanja" [ngValue]="p.id">{{p.question}}</option>
+                    </select> <br/>
+                    <button (click)='izBazeT()'>Ubaci</button>
+                </ng-container>
+                <ng-container *ngIf="type=='anketa' && anketaPitanja != null">
+                    <select name='anketaPitanje' [(ngModel)]='anketaPitanje'>
+                        <option *ngFor="let p of anketaPitanja" [ngValue]="p.id">{{p.question}}</option>
+                    </select> <br/>
+                    <button (click)='izBazeA()'>Ubaci</button>
+                    {{message5}}
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<div style='color:red'>
+    {{message}}
+</div>

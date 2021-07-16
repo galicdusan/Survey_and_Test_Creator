@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ankete.korisnici"}],"uuid":"0e83003d46af45efa5d6fd6b942b3910"}

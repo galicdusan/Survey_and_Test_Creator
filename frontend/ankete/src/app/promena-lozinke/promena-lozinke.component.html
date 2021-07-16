@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+    <div class='col-md-4'></div>
+    <div class="col-md-4">
+        <div class="form_main">
+                <h4 class="heading"><strong>Promena lozinke </strong> <span></span></h4>
+                <div class="form">
+                <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                    <input type="password" required="true" placeholder="Unesite vasu staru lozinku" [(ngModel)]="stara" name="stara" class="txt" >
+                    <input type="password" required="true" placeholder="Unesite vasu novu lozinku" [(ngModel)]="nova" name="nova" class="txt" >
+                    <input type="password" required="true" placeholder="Potvrdite vasu novu lozinku" [(ngModel)]="potvrda" name="potvrda" class="txt" >
+                     <br/>   
+                     <button class='btn btn-primary' style='margin-top: 20px' (click)='promeni()'>Promeni</button>
+                    <button class='btn btn-danger' style='margin-left: 20px; margin-top: 20px' (click)='cancel()'>Cancel</button>                      
+                </form>
+                </div>
+        </div>
+    </div>
+    <div class='col-md-4'></div>
+    </div>
+</div>

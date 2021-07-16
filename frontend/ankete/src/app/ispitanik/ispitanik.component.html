@@ -1,0 +1,69 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6' style='align-content: center; margin-top: 100px; margin-bottom:300px'>
+            <div>
+               <b> Pretrazi: </b>
+                <input type='text' name='pretraga' placeholder="Unesite pretragu" [(ngModel)]='pretraga'>
+                <button (click)='pretrazi()'>Pretraga</button>
+            </div>
+            <br/>
+            <div>
+                <b>Sortiraj: </b>
+                <select name='order' [(ngModel)]='order' (change)='orderThem()'>
+                    <option value='+'>Rastuce</option>
+                    <option value='-'>Opadajuce</option>
+                </select>
+                <select name='criteria' [(ngModel)]='criteria' (change)='orderThem()'>
+                    <option value='name'>Ime</option>
+                    <option value='startDate'>Datum pocetka</option>
+                    <option value='endDate'>Datum kraja</option>
+                </select>
+            </div>
+            <br/>
+            
+            <table>
+                <tr>
+                    <th>
+                        Ime
+                    </th>
+                    <th>
+                        Datum pocekta
+                    </th>
+                    <th>
+                        Datum kraja
+                    </th>
+                    <th>
+                        Vreme za izradu
+                    </th>
+                </tr>
+                <tr *ngFor='let t of testovi; trackBy: '>
+                    <td>
+                        <a (click)='desno(t)'>
+                            {{t.name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{t.startDate}}
+                    </td>
+                    <td>
+                        {{t.endDate}}
+                    </td>
+                    <td *ngIf="t.type=='test'">
+                        {{t.time}}
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+        <div class='col-md-6 '>
+            <div style="margin-top: 300px; margin-left: 50px">
+                {{about}} <br/> <br/>
+                {{message2}} <br/> <br/>
+                <button (click)='pocni()' *ngIf='dozvoliRad'>Pocni</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style='color:red'>
+    {{message}}
+</div>

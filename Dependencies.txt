@@ -1,0 +1,9 @@
+npm install --save bootstrap
+npm install --save connect-multiparty
+npm install ng2-img-max blueimp-canvas-to-blob --save
+npm i ng-recaptcha --save
+npm install ng2-charts chart.js --save
+
+za bazu:
+mongodump -d <database_name> -o <directory_backup>
+mongorestore -d <database_name> <directory_backup>

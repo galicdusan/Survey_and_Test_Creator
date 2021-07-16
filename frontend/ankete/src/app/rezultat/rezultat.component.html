@@ -1,0 +1,45 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6' style="margin-bottom: 300px">
+            <br/>{{message}} {{vreme}} <br/>
+            <div style='color:red'>
+                {{message2}} 
+            </div>
+            <div style='padding-top: 375px;'>
+                <div class="progress" style='height: 20px !important;'>
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{width: procenat+'%'}" style="height:20px" aria-valuemin="0" aria-valuemax="100">{{procenat}}%</div>
+                </div>
+                Popunjeno je {{uradjeno}}/{{ovajTest.questions.length}} pitanja. <br/>
+                Da li zelite da se vratite i izmenite/dopunite odgovore? <br/><br/>
+                <ng-container *ngIf="ovajTest.type=='anketa'">
+                    <button (click)='kasnije()' style='margin-left:50px'>Zavrsi kasnije</button>
+                </ng-container>
+                    <button (click)='vrati()' style='margin-left:25px'>Vrati se</button>
+                <button *ngIf="!zavrsio" (click)='zavrsi()' style='margin-left:60px'>Zavrsi</button>
+            </div>
+        </div>
+        <div class='col-md-6' style='text-align: center; margin-top: 150px'>
+            <ng-container *ngIf="zavrsio">
+               <br/> Ovako ste odgovorili na pitanja: <br/><br/>
+                <div *ngFor='let p of pitanja; let i = index'>
+                    <ng-container *ngIf="ovajTest.type=='test'">
+                        {{poeni[i]}} poena - 
+                    </ng-container>
+                    <b>  {{p.question}} </b> <br/>
+                    <div *ngFor='let o of odgovor.answers[i].answer'>
+                        <ng-container *ngIf="o != ''">
+                            {{o}} <br/>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="ovajTest.type=='test' && zavrsio">
+                <br/>Ostvarili ste {{ostvareni}}/{{ukupni}} poena na ovom testu. <br/><br/>                
+            </div>
+            <br/> <br/>
+            <div *ngIf="zavrsio">
+                <button (click)='home()'>Nazad</button>
+            </div>
+        </div>
+    </div>
+</div>

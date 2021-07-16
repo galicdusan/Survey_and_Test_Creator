@@ -1,0 +1,52 @@
+{
+ "Quiz":{
+ 	"Name":"Moja anketa",
+ 	"StartDate":"2020-01-25",
+ 	"EndDate":"2020-02-10",
+ 	"About":"Osnovni podaci o anketi",
+	"Privatnost" : "anonimna",
+    	"Type" : "anketa",
+	"Page" : "2"
+ },
+ "Questions":[
+ {
+ 	"Question":"Ko je jedini Srbin dobitnik Nobelove nagrade?",
+ 	"Type":"4",
+ 	"Answers":[
+ 		"Tesla",
+ 		"Andric",
+ 		"Pupin",
+ 		"Milankovic"
+ 	],
+	"Obavezan":1
+ },
+ {
+ 	"Question":"Unesite tri omiljena broja?",
+ 	"Type":"1",
+ 	"NumberAnswers":"3",
+	"Obavezan":0
+ },
+ {
+ 	"Question":"Unesite dve omiljene boje?",
+ 	"Type":"2",
+ 	"NumberAnswers":"2",
+	"Obavezan":0
+ },
+ {
+	"Question":"Omiljeni citat?",
+	"Type":"3",
+	"Obavezan":0
+ },
+ {
+	"Question":"Koji prevoz koristite?",
+	"Type":"5",
+	"Answers":[
+ 		"Auto",
+ 		"Autobus",
+ 		"Voz",
+ 		"Bicikl"
+ 	],
+	"Obavezan":1
+ }
+ ]
+}

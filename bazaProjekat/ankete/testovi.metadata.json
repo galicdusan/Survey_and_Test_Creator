@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"ankete.testovi"}],"uuid":"fe2d5c7d409f4d208385d07836598e5d"}

@@ -1,0 +1,86 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6'>
+            <ng-container *ngIf="test.type=='anketa'">
+                <ng-container *ngFor="let o of odgovori; let i = index">
+                    <br/><br/>
+                    <b> Anketa {{i+1}}</b>
+                    <ng-container *ngIf="test.privatnost=='personalizovana' && korisnici != null">
+                        <ng-container *ngFor="let k of korisnici">
+                            <ng-container *ngIf="k.korime == o.user">
+                                <br/> {{k.ime}}
+                                <br/> {{k.prezime}}
+                                <br/> {{k.datum_rodjenja}}
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <div *ngFor="let q of o.answers">
+                        <b> Pitanje: </b> 
+                        <ng-container *ngFor="let p of pitanja">
+                            <ng-container *ngIf="p.id == q.id_question">
+                            {{p.question}}
+                            </ng-container>
+                        </ng-container><br/>
+                        <b>Odgovor/i: </b>
+                        <ng-container *ngFor="let a of q.answer"> 
+                            <ng-container *ngIf="a != ''">
+                                <br/> {{a}}
+                            </ng-container>
+                        </ng-container>
+                        <br/><br/>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="test.type=='test'">
+                <ng-container *ngFor="let o of odgovori; let i = index">
+                    <br/><br/>
+                    <b> Test {{i+1}}</b>
+                    <ng-container *ngIf="korisnici != null">
+                        <ng-container *ngFor="let k of korisnici">
+                            <ng-container *ngIf="k.korime == o.user">
+                                <br/> {{k.ime}}
+                                <br/> {{k.prezime}}
+                                <br/> Broj ostvarenih poena: {{o.points}} / {{sumPoints}}
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div class='col-md-6'>
+            <br/><br/>
+            <b>Zbirni izvestaj:</b>
+            <ng-container *ngIf="test.type=='anketa' && dataAvailable">
+                <div *ngFor="let p of pitanja; let i = index">
+                    <b>Pitanje: </b> {{p.question}} <br/>
+                    <b>Odgovori/i: </b> 
+                    <ng-container *ngFor="let o of nizOdg[i]; let j = index">
+                        <br/> Tekst odgovora: {{o}} <br/> Broj pojavljivanja: {{nizPojav[i][j]}} &nbsp;&nbsp;&nbsp; Procenat pojavljivanja: {{100*nizPojav[i][j]/sumPojav[i]}}% <br/>
+                    </ng-container>
+                    <br/>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="test.type=='test'">
+                <br/><br/>
+                <div *ngFor="let g of grading; let i = index">
+                     {{i*10+(i!=0)}}-{{i*10+10}}% : {{g}} &nbsp;&nbsp; {{100* g/all}}%
+                </div>
+                <div class="chart-wrapper">
+                    <canvas baseChart height="240px" style="margin-top: 50px;" 
+                    [data]="pieChartData" 
+                    [labels]="pieChartLabels" 
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend">
+                  </canvas>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div style='color:red'>
+    {{message}}
+</div>

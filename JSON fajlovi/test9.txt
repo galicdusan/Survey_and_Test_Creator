@@ -1,0 +1,61 @@
+{
+ "Quiz":{
+ 	"Name":"Moj test",
+ 	"StartDate":"2020-01-25",
+ 	"EndDate":"2020-02-10",
+ 	"About":"Osnovni podaci o testu",
+	"Time":"2:00",
+    	"Type" : "test",
+	"Points": [
+		5,
+		10,
+		5,
+		10,
+		20
+	]
+ },
+ "Questions":[
+ {
+ 	"Question":"Iznad koje reke je Savski most?",
+ 	"Type":"4",
+ 	"Answers":[
+ 		"Dunav",
+ 		"Drina",
+ 		"Tisa",
+ 		"Sava"
+ 	],
+	"Correct":[
+		"Sava"
+	]
+ },
+ {
+ 	"Question":"Koliko udova ima covek?",
+ 	"Type":"1",
+	"Correct":[
+		"4"
+	]
+ },
+ {
+ 	"Question":"Koji je glavni grad Kine?",
+ 	"Type":"2",
+	"Correct":[
+		"Peking"
+	]
+ },
+ {
+	"Question":"Koje energije su ciste?",
+	"Type":"5",
+	"Answers":[
+ 		"Solarna",
+ 		"Ugalj",
+ 		"Nafta",
+ 		"Gas",
+		"Nuklearna"
+ 	],
+	"Correct":[
+		"Solarna",
+		"Nuklearna"
+	]
+ }
+ ]
+}

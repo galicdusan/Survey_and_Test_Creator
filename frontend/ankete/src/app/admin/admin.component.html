@@ -1,0 +1,121 @@
+<div class="mainContainer">
+    <div class="container">
+        <div class="row">
+        <div class='col-md-4'></div>
+        <div class="col-md-4">
+            <div class="form_main">
+                    <h4 class="heading"><strong>Administrator </strong> <span></span></h4>
+                    <div class="form">
+                    <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                        <table>
+                            <tr>
+                                <td width="300">
+                                    <input type="text" required="true" placeholder="Ime" [(ngModel)]="ime" name="ime" class="txt"> 
+                                </td>
+                                <td width="25">
+                                    <button (click)="azuriraj('ime',ime)" style='margin-left:75px'>Azuriraj</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Prezime" [(ngModel)]="prezime" name="prezime" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('prezime',prezime)" style='margin-left: 75px;'>Azuriraj</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Korisnicko ime" [(ngModel)]="korime" name="korime" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('korime',korime)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Lozinka" [(ngModel)]="lozinka" name="lozinka" class="txt" >
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('lozinka',lozinka)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Datum rodjenja u obliku dd-MM-yyyy" [(ngModel)]="datum" name="datum" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('datum_rodjenja',datum)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Mesto rodjenja" [(ngModel)]="mesto" name="mesto" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('mesto_rodjenja',mesto)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="JMBG" [(ngModel)]="jmbg" name="jmbg" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('jmbg',jmbg)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Telefon" [(ngModel)]="telefon" name="telefon" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('telefon',telefon)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="E-mail" [(ngModel)]="email" name="email" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('mail',email)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" required="true" placeholder="Tip korisnika" [(ngModel)]="tip" name="tep" class="txt">
+                                </td>
+                                <td>
+                                    <button (click)="azuriraj('tip',tip)" style='margin-left: 75px;'>Azuriraj</button> 
+                                </td>
+                            </tr>                        
+                        </table>
+                         <br/><br/>                         
+                    </form>
+                    </div>
+                    <button (click)='dodaj()' style='float: left' >Dodaj</button>&nbsp;
+                    <button (click)='izbrisi()' style='float: right'>Brisi</button>
+                    
+            </div>
+        </div>
+        <div class='col-md-4' style='margin-top: 100px'>
+            <ng-container *ngIf="dataAvailable">
+                <div style='margin-left: 50px'>
+                    <b>Izaberite korisnika iz baze:</b> <br/>
+                    <select name='selektovan' [(ngModel)]='selektovan' (change)='promena()'>
+                        <option *ngFor='let k of korisnici' [ngValue]="k">{{k.korime}}</option>
+                    </select><br/><br/>
+                </div>
+
+                <div style='margin-top: 100px;margin-left: 50px'>
+                    <b>Pristigli zahtevi: </b> <br/>
+                    <select name='zahtev' [(ngModel)]='zahtev'>
+                        <option *ngFor='let z of zahtevi' value='{{z.korime}}'>{{z.korime}}</option>
+                    </select><br/><br/>
+                    <button (click)='prihvati()'>Prihvati</button>
+                    <button (click)='odbij()' style='margin-left: 50px'>Odbij</button>
+                </div>
+            </ng-container>
+        </div>
+        </div>
+    </div>   
+</div>

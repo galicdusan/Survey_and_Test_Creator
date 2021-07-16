@@ -1,0 +1,57 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-4'>
+            <br/>{{message1}} {{vreme}}<br/>
+            <div *ngIf="message!=''" style='color:red'>
+                {{message}}
+            </div>
+        </div>
+        <div class='col-md-4' style='margin-bottom:300px'>
+            <div *ngIf="dataAvailable">
+                <ng-container *ngFor='let q of questions; let k = index'>
+                    <ng-container *ngIf="(ovajTest.type=='anketa' && (k>=currentPage*perPage && (currentPage+1)*perPage>k)) || ovajTest.type=='test'">
+                        <br/><br/><br/>{{q.question}} <br/>
+                        <ng-container *ngIf="q.type=='1'">
+                            <ng-container *ngFor='let n of numbers[k]'>
+                                Odgovor {{n}}: <input type='text' name='{{q.id}}odgovor{{n}}' 
+                                [(ngModel)]="odgovor.answers[k].answer[n-1]"><br/>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="q.type=='2'">
+                            <ng-container *ngFor='let n of numbers[k]'>
+                                Odgovor {{n}}: <input type='text' name='{{q.id}}odgovor{{n}}' 
+                                [(ngModel)]="odgovor.answers[k].answer[n-1]"><br/>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="q.type=='3'">
+                            Odgovor: <textarea rows = "4" cols= "50" name='{{q.id}}odgovor' 
+                            [(ngModel)]="odgovor.answers[k].answer[0]"></textarea><br/>
+                        </ng-container>
+                        <ng-container *ngIf="q.type=='4'">
+                            <ng-container *ngFor='let a of q.answers'>
+                                <input type='radio' name='{{q.id}}radio' value="{{a}}" 
+                                [(ngModel)] = "odgovor.answers[k].answer[0]"> {{a}} <br/>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="q.type=='5'">
+                            <ng-container *ngFor='let a of q.answers; let i = index'>
+                                <input type='checkbox' name='{{q.id}}checkbox{{i}}' value="{{a}}" id="{{a}}" (change)='insert(a, k, i)'
+                                [(ngModel)] = "odgovor.answers[k].answer[i]"> {{a}} <br/>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <br/><br/>
+            <ng-container *ngIf="ovajTest.type=='anketa'">
+                <ng-container *ngFor="let p of pages">
+                    <button (click)='move(p)'>{{p+1}}</button> &nbsp;
+                </ng-container>
+            </ng-container>
+            <button (click)='predaj()' style='float:right'>Predaj</button>
+<!--      <button (click)='pomoc()'>Pomoc</button>      -->         
+        </div>
+        <div class='col-md-4'></div>
+    </div>
+</div>
+            
